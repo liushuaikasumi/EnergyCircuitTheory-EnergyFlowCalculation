@@ -13,7 +13,8 @@ from cmath import phase
 from scipy.fftpack import fft
 from matplotlib import pyplot as plt
 from contextlib import contextmanager
-
+import matplotlib  
+matplotlib.use('TkAgg') 
 
 @contextmanager
 def context(event):
@@ -25,10 +26,10 @@ def context(event):
 
 
 with context('数据读取与处理'):
-    tb1 = pd.read_excel('./6节点热网动态data.xls', sheet_name='Node').fillna(0)
-    tb2 = pd.read_excel('./6节点热网动态data.xls', sheet_name='Branch')
-    tb3 = pd.read_excel('./6节点热网动态data.xls', sheet_name='Device', header=None, index_col=0)
-    tb4 = pd.read_excel('./6节点热网动态data.xls', sheet_name='Dynamic')
+    tb1 = pd.read_excel('./EnergyCircuitTheory-EnergyFlowCalculation/6节点热网动态data.xlsx', sheet_name='Node').fillna(0)
+    tb2 = pd.read_excel('./EnergyCircuitTheory-EnergyFlowCalculation/6节点热网动态data.xlsx', sheet_name='Branch')
+    tb3 = pd.read_excel('./EnergyCircuitTheory-EnergyFlowCalculation/6节点热网动态data.xlsx', sheet_name='Device', header=None, index_col=0)
+    tb4 = pd.read_excel('./EnergyCircuitTheory-EnergyFlowCalculation/6节点热网动态data.xlsx', sheet_name='Dynamic')
     # 水力参数
     L = tb2['length'].values * 1e3
     D = tb2['diameter'].values
@@ -163,6 +164,7 @@ with context('可视化'):
         plt.plot(TD_Tf.T)
         plt.figure(2)
         plt.plot(TD_Tt.T)
+        plt.show()
         # sel = [0, 2, 7, 5]  # 仅查看部分管道
         # plt.figure(3)
         # plt.plot(TD_Tt[sel, :].T)

@@ -13,7 +13,8 @@ from cmath import phase
 from scipy.fftpack import fft
 from matplotlib import pyplot as plt
 from contextlib import contextmanager
-
+import matplotlib  
+matplotlib.use('TkAgg') 
 
 @contextmanager
 def context(event):
@@ -26,10 +27,10 @@ def context(event):
 
 with context('数据读取与处理'):
     # 原始数据
-    pipe_table = pd.read_excel('./7节点气网动态data.xls', sheet_name='Branch')
-    node_table = pd.read_excel('./7节点气网动态data.xls', sheet_name='Node')
-    load_table = pd.read_excel('./7节点气网动态data.xls', sheet_name='Load')
-    pres_table = pd.read_excel('./7节点气网动态data.xls', sheet_name='Pressure')
+    pipe_table = pd.read_excel('./EnergyCircuitTheory-EnergyFlowCalculation/7节点气网动态data.xlsx', sheet_name='Branch')
+    node_table = pd.read_excel('./EnergyCircuitTheory-EnergyFlowCalculation/7节点气网动态data.xlsx', sheet_name='Node')
+    load_table = pd.read_excel('./EnergyCircuitTheory-EnergyFlowCalculation/7节点气网动态data.xlsx', sheet_name='Load')
+    pres_table = pd.read_excel('./EnergyCircuitTheory-EnergyFlowCalculation/7节点气网动态data.xlsx', sheet_name='Pressure')
     # 数据初步处理
     numpipe = len(pipe_table)  # 支路数
     numnode = len(node_table)  # 节点数
@@ -221,6 +222,7 @@ with context('可视化与输出'):
         plt.plot(TD_E_G.T)
         plt.figure(2)
         plt.plot(TD_E_p[:-1].T)
+        plt.show()
         # print(TD_E_G)
         # print(TD_E_p)
     """ 导出潮流数据
